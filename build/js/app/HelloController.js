@@ -1,0 +1,1 @@
+function HelloController(e){e.greeting={text:"Hello"}}define("HelloController",function(){});

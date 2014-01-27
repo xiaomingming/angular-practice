@@ -1,0 +1,19 @@
+<html ng-app>
+    <head>
+        <meta charset="utf-8" />
+        <title>hello world</title>
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="js/libs/html5shiv.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="js/libs/angular.min.js"></script>
+        <script type="text/javascript" src="js/libs/require.js"></script>
+        <script type="text/javascript" src="js/r-config.js"></script>
+        <script type="text/javascript" src="js/app/HelloController.js"></script>
+    </head>
+    <body>
+        <div ng-controller="HelloController">
+            <input ng-model="greeting.text">
+            <p>{{greeting.text}},world</p>
+        </div>
+    </body>
+</html>
