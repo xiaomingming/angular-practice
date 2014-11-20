@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Book Store</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    ul,
+    li {
+        list-style: none;
+    }
+    body {
+        margin: 40px;
+    }
+    .current {
+        background: #000;
+        color: #fff;
+    }
+    </style>
+    <!-- <script src="framework/angular-1.3.0.14/angular.js"></script>
+    <script src="framework/angular-ui-router.js"></script> -->
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script> -->
+    <script type="text/javascript">
+    var app = angular.module('routerApp', ['ui.router']);
+    app.config(function($stateProvider, $urlRouterProvider) {
+        // $urlRouterProvider.otherwise('/default');
+        // $urlRouterProvider.otherwise('/home');
+        var home = {
+                name: 'home',
+                url: '/home',
+                templateUrl: 'tpl/home.html'
+            },
+            links = {
+                name: 'home.links',
+                url: '/links',
+                templateUrl: 'tpl/links.html'
+            },
+            about = {
+                name: 'about',
+                url: '/about',
+                views: {
+                    '': {
+                        templateUrl: 'tpl/about.html' //作为多视图的模板
+                    },
+                    'a@about': {
+                        template: '<h1>A view</h1>'
+                    },
+                    'b@about': {
+                        templateUrl: 'tpl/info.html',
+                        controller: function($scope) {
+                            $scope.info = {
+                                name: 'xiaoming',
+                                age: 22
+                            };
+                        },
+                        controllerProvider: function($stateParams) {
+                            console.log($stateParams);
+                        }
+                    }
+                }
+            },
+            multiple = {
+                name: 'multiple',
+                url: '/lalal',
+                views: {
+                    'a': {
+                        template: '<h1>A view</h1>'
+                    },
+                    'b': {
+                        template: '<h1>B view</h1>'
+                    }
+                }
+            };
+        $stateProvider.state(home);
+        $stateProvider.state(links);
+        $stateProvider.state(about);
+        $stateProvider.state(multiple);
+    });
+    </script>
+</head>
+
+<body ng-app="routerApp">
+    <ul>
+        <li><a ui-sref="home" ui-sref-active="current">home</a>
+        </li>
+        <li><a ui-sref="about" ui-sref-active-eq="current">about</a>
+        </li>
+        <li><a ui-sref="multiple" ui-sref-active="current">multiple</a>
+        </li>
+    </ul>
+    <div ui-view></div>
+    <ul>
+        <li ui-view="a"></li>
+        <li ui-view="b"></li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8" />
+    <title>ngCloak</title>
+    <!--[if lt IE 9]>
+            <script type="text/javascript" src="js/libs/html5shiv.js"></script>
+        <![endif]-->
+    <style type="text/css">
+    [ng-cloak] {
+        display: none;
+    }
+    </style>
+    <script type="text/javascript" src="js/libs/angular.min.js"></script>
+    <script type="text/javascript">
+    angular.module('myApp', [])
+        .controller('ctr', ['$scope',
+            function($scope) {
+                $scope.info = [{
+                    name: 'xxx',
+                    age: 22
+                }, {
+                    name: 'xxx',
+                    age: 22
+                }, {
+                    name: 'xxx',
+                    age: 22
+                }];
+                $scope.title = 'lalalla';
+                $scope.title2 = 'ddddd';
+                $scope.myHTML = '<span>lalalala</span>';
+            }
+        ]);
+        angular.module('checkApp',[]).controller('ctr',['$scope',function($scope){
+            $scope.chk=true;
+        }]);
+    </script>
+
+    <body>
+
+        <div ng-app="myApp" ng-controller="ctr">
+            <div ng-repeat="obj in info" ng-cloak>{{obj.name+','+obj.age}}</div>
+            <div ng-bind-template="{{title}}{{title2}}"></div>
+            <div ng-bind-template="title"></div>
+        </div>
+        <div ng-app="checkApp" ng-controller="ctr">
+            <input type="checkbox" ng-model="chk">
+            <input type="checkbox" ng-model="chk">
+        </div>
+       <!-- <div ng-app="bindHtmlExample"> <div ng-bind-html="myHTML"></div></div> -->
+    </body>
+
+</html>
